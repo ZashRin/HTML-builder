@@ -82,9 +82,7 @@ async function init() {
   await clearDir(dest);
   await fs.copyFile(path.join(__dirname, 'template.html'), destIndex);
   await createIndexFile(srcComponents, destIndex);
-
   await createCSSBundle(srcStyles, dest,'style.css');
-
   await copyAssets(srcAssets, destAssets);
 }
 
