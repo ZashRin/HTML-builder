@@ -18,10 +18,6 @@ const clearDir = async (dir) => {
   await makeDirectory(dir);
 };
 
-const copyFile = async (src, dest) => {
-  await fs.copyFile(src, dest);
-};
-
 const createCSSBundle = async (src, dest, fileName) => {
   await fs.writeFile(path.join(dest, fileName), '');
   const files = await readFilesFromDir(src);
@@ -84,7 +80,7 @@ async function copyAssets(src, dest) {
 
 async function init() {
   await clearDir(dest);
-  await copyFile(path.join(__dirname, 'template.html'), destIndex);
+  await fs.copyFile(path.join(__dirname, 'template.html'), destIndex);
   await createIndexFile(srcComponents, destIndex);
 
   await createCSSBundle(srcStyles, dest,'style.css');
