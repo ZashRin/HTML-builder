@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs/promises');
 const path = require('path');
 const process = require('process');
 const readLine = require('readline');
@@ -6,11 +6,9 @@ const readLine = require('readline');
 let p = path.join(__dirname, 'text.txt');
 let content = '';
 
-fs.writeFile(p, content, (err) => {
-  if(err) {
-    console.error(err);
-  }
-});
+const writeFile = async () => await fs.writeFile(p, content);
+
+writeFile();
 
 const rl = readLine.createInterface({
   input: process.stdin,
@@ -44,11 +42,7 @@ const steps = {
   },
 
   write: async () => {
-    fs.appendFile(p, content, (err) => {
-      if(err) {
-        console.log(err);
-      }
-    });
+    await fs.appendFile(p, content);
   }
 };
 
